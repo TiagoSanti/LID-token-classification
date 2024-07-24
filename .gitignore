@@ -1,0 +1,5 @@
+venv/
+model_finetuned/
+results/
+wandb/
+.env
