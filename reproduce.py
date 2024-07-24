@@ -185,6 +185,13 @@ class NERModelTrainer:
         self.model.save_pretrained("./model_finetuned")
         self.tokenizer.save_pretrained("./model_finetuned")
 
+        self.model.push_to_hub(
+            "bert-ner-finetuned", use_auth_token=os.getenv("HUGGINGFACE_API_KEY")
+        )
+        self.tokenizer.push_to_hub(
+            "bert-ner-finetuned", use_auth_token=os.getenv("HUGGINGFACE_API_KEY")
+        )
+
     def predict(self, text, score_threshold=0.5):
         model = BertForTokenClassification.from_pretrained("./model_finetuned")
         tokenizer = BertTokenizerFast.from_pretrained("./model_finetuned")
