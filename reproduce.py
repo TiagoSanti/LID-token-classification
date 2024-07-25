@@ -147,8 +147,8 @@ class NERModelTrainer:
 
     def train(self):
         load_dotenv()
-        wandb.login()
-        wandb.init(project="ner-finetuning", entity="your_wandb_username")
+        wandb.login(key=os.getenv("WANDB_API_KEY"))
+        wandb.init(project="ner-finetuning")
 
         dataset_info = {
             "train_size": len(self.full_dataset["train"]),
