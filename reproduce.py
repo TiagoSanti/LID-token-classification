@@ -197,8 +197,6 @@ class NERModelTrainer:
         if wandb_api_key:
             wandb.log(self.test_evaluation)
             wandb.finish()
-        else:
-            print(self.test_evaluation)
 
         self.model.save_pretrained("./model_finetuned")
         self.tokenizer.save_pretrained("./model_finetuned")
