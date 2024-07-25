@@ -22511,8 +22511,8 @@ executada -X- _ O
 ao -X- _ O
 preço -X- _ O
 de -X- _ O
-67 -X- _ O
-reais -X- _ O
+67 -X- _ B-valor_financeiro
+reais -X- _ I-valor_financeiro
 por -X- _ O
 papel -X- _ O
 e -X- _ O
@@ -22601,8 +22601,8 @@ das -X- _ O
 , -X- _ O
 cotadas -X- _ O
 a -X- _ O
-87,25 -X- _ O
-reais -X- _ O
+87,25 -X- _ B-valor_financeiro
+reais -X- _ I-valor_financeiro
 , -X- _ O
 logo -X- _ O
 após -X- _ O
