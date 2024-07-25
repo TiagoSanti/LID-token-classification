@@ -147,11 +147,11 @@ class NERModelTrainer:
 
     def train(self):
         load_dotenv()
-        wandb_api_key = os.getenv("WANDB_API")
+        wandb_api_key = os.getenv("WANDB_API_KEY")
         hf_api_key = os.getenv("HUGGINGFACE_API_KEY")
 
         if wandb_api_key:
-            wandb.login(key=os.getenv("WANDB_API_KEY"))
+            wandb.login(key=wandb_api_key)
             wandb.init(project="ner-finetuning")
 
             dataset_info = {
@@ -176,7 +176,6 @@ class NERModelTrainer:
             eval_strategy="steps",
             eval_steps=10,
             report_to="wandb" if wandb_api_key else None,
-            run_name="ner-finetuning",
         )
         data_collator = DataCollatorForTokenClassification(self.tokenizer)
 
