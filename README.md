@@ -43,7 +43,7 @@ Colocar no Label-Studio o modelo para fazer pré-rotulação.
 
 ### Entrega
 
-Entrega via email com os links para um [vídeo]() de 15 minutos e todos os código no GitHub.
+Entrega via email com os links para um vídeo de 15 minutos e todos os código no GitHub.
 
 No repositório do github deve conter um código driver com o nome reproduzir.py que ao chamá-lo deve conseguir treinar o modelo.
 
@@ -145,7 +145,3 @@ O projeto foi executado em um ambiente Linux, portanto, as instruções a seguir
 ## Wandb e HuggingFace
 
 Os resultados dos treinamentos do modelo estão disponíveis no [Wandb](https://wandb.ai/tiagosanti/ner-finetuning/workspace?nw=nwusertiagosanti) e o modelo treinado está disponível no [HuggingFace](https://huggingface.co/TiagoSanti/bert-ner-finetuned/tree/main).
-
-## Vídeo
-
-O vídeo com a apresentação do projeto está disponível no [YouTube]().
