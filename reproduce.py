@@ -146,6 +146,17 @@ class NERModelTrainer:
         }
 
     def train(self):
+        load_dotenv()
+        wandb.login()
+        wandb.init(project="ner-finetuning", entity="your_wandb_username")
+
+        dataset_info = {
+            "train_size": len(self.full_dataset["train"]),
+            "validation_size": len(self.full_dataset["validation"]),
+            "test_size": len(self.full_dataset["test"]),
+        }
+        wandb.log(dataset_info)
+
         tokenized_datasets = self.full_dataset.map(
             self.tokenize_and_align_labels, batched=True
         )
@@ -175,7 +186,6 @@ class NERModelTrainer:
             compute_metrics=self.compute_metrics,
         )
 
-        print(f"Using device '{self.device}'")
         trainer.train()
 
         self.test_evaluation = trainer.evaluate(tokenized_datasets["test"])
@@ -224,11 +234,5 @@ class NERModelTrainer:
         return translated_predictions
 
 
-load_dotenv()
-wandb.login(key=os.getenv("WANDB_API_KEY"))
-wandb.init(project="ner-finetuning")
-
 trainer = NERModelTrainer("datasets/labelled_dataset.conll")
 trainer.train()
-
-print(trainer.test_evaluation["eval_report"])
