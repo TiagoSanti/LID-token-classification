@@ -1,6 +1,8 @@
+__pycache__/
 venv/
 model_finetuned/
 bert-ner-finetuning/
 results/
 wandb/
+cache.db
 .env
