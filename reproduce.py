@@ -147,15 +147,19 @@ class NERModelTrainer:
 
     def train(self):
         load_dotenv()
-        wandb.login(key=os.getenv("WANDB_API_KEY"))
-        wandb.init(project="ner-finetuning")
+        wandb_api_key = os.getenv("WANDB_API")
+        hf_api_key = os.getenv("HUGGINGFACE_API_KEY")
 
-        dataset_info = {
-            "train_size": len(self.full_dataset["train"]),
-            "validation_size": len(self.full_dataset["validation"]),
-            "test_size": len(self.full_dataset["test"]),
-        }
-        wandb.log(dataset_info)
+        if wandb_api_key:
+            wandb.login(key=os.getenv("WANDB_API_KEY"))
+            wandb.init(project="ner-finetuning")
+
+            dataset_info = {
+                "train_size": len(self.full_dataset["train"]),
+                "validation_size": len(self.full_dataset["validation"]),
+                "test_size": len(self.full_dataset["test"]),
+            }
+            wandb.log(dataset_info)
 
         tokenized_datasets = self.full_dataset.map(
             self.tokenize_and_align_labels, batched=True
@@ -171,7 +175,7 @@ class NERModelTrainer:
             logging_steps=10,
             eval_strategy="steps",
             eval_steps=10,
-            report_to="wandb",
+            report_to="wandb" if wandb_api_key else None,
             run_name="ner-finetuning",
         )
         data_collator = DataCollatorForTokenClassification(self.tokenizer)
@@ -189,18 +193,23 @@ class NERModelTrainer:
         trainer.train()
 
         self.test_evaluation = trainer.evaluate(tokenized_datasets["test"])
-        wandb.log(self.test_evaluation)
-        wandb.finish()
+
+        if wandb_api_key:
+            wandb.log(self.test_evaluation)
+            wandb.finish()
+        else:
+            print(self.test_evaluation)
 
         self.model.save_pretrained("./model_finetuned")
         self.tokenizer.save_pretrained("./model_finetuned")
 
-        self.model.push_to_hub(
-            "bert-ner-finetuned", use_auth_token=os.getenv("HUGGINGFACE_API_KEY")
-        )
-        self.tokenizer.push_to_hub(
-            "bert-ner-finetuned", use_auth_token=os.getenv("HUGGINGFACE_API_KEY")
-        )
+        if hf_api_key:
+            self.model.push_to_hub(
+                "bert-ner-finetuned", use_auth_token=os.getenv("HUGGINGFACE_API_KEY")
+            )
+            self.tokenizer.push_to_hub(
+                "bert-ner-finetuned", use_auth_token=os.getenv("HUGGINGFACE_API_KEY")
+            )
 
     def predict(self, text, score_threshold=0.5):
         model = BertForTokenClassification.from_pretrained("./model_finetuned")
