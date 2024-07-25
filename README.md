@@ -2,7 +2,7 @@
 
 🇧🇷 [README](README.md) | 🇺🇸 [README](README.en.md)
 
-Este repositório contém o código e os datasets utilizados na resolução do problema do processo seletivo da equipe de IA do projeto Lia e LEDES em 2024.2.
+Este repositório contém o código e os datasets utilizados na resolução do problema do processo seletivo da equipe de IA do projeto LIA e LEDES em 2024.2.
 
 ## Descrição do problema: Token Classification
 
