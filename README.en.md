@@ -2,7 +2,7 @@
 
 🇧🇷 [README](README.md) | 🇺🇸 [README](README.en.md)
 
-This repository contains the code and datasets used in solving the selective process problem for the AI team of the Lia and LEDES project in 2024.2.
+This repository contains the code and datasets used in solving the selective process problem for the AI team of the LIA and LEDES project in 2024.2.
 
 ## Problem Description: Token Classification
 
@@ -43,7 +43,7 @@ Place the model in Label-Studio for pre-labeling.
 
 ### Submission
 
-Submit via email with links to a 15-minute [video]() and all the code on GitHub.
+Submit via email with links to a 15-minute video and all the code on GitHub.
 
 The GitHub repository must contain a driver code named `reproduce.py` that, when called, should be able to train the model.
 
@@ -145,7 +145,3 @@ The project was executed in a Linux environment, therefore, the following instru
 ## Wandb and HuggingFace
 
 The training results of the model are available on [Wandb](https://wandb.ai/tiagosanti/ner-finetuning/workspace?nw=nwusertiagosanti) and the trained model is available on [HuggingFace](https://huggingface.co/TiagoSanti/bert-ner-finetuned/tree/main).
-
-## Video
-
-The video presenting the project is available on [YouTube]().
